@@ -2,26 +2,24 @@ import { View, Text, Button } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "../types";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { Note, getAllNotes, getNote } from "../services/noteStoreService";
 type Props = {
   toggleNewNote: (toggle: boolean) => void;
 };
 export const HomeScreen: React.FC<Props> = () => {
   const navigation = useNavigation<StackNavigationProp>();
-  const [noteText, setNoteText] = useState<string>("");
+  const [notes, setNotes] = useState<Note[]>();
 
   useFocusEffect(() => {
-    getNote().then((result) => setNoteText(result ?? ""));
+    getAllNotes().then((result) => setNotes(result.notes));
   });
 
-  const getNote = async () => {
-    return await AsyncStorage.getItem("note");
-  };
   return (
     <>
       <View>
-        <Text>{noteText}</Text>
+        {notes?.map((note) => (
+          <Text key={note.id}>{note.text}</Text>
+        ))}
       </View>
       <Button
         onPress={() => navigation.navigate("EditNote")}
