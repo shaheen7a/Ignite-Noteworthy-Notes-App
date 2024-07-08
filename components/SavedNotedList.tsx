@@ -1,10 +1,12 @@
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getAllNotes, Note } from "../services/noteStoreService";
+import { StackNavigationProp } from "../types";
 
 export const SavedNotesList: React.FC = () => {
   const [notes, setNotes] = useState<Note[]>();
+  const navigation = useNavigation<StackNavigationProp>();
 
   useFocusEffect(() => {
     getAllNotes().then((result) => setNotes(result.notes));
@@ -14,7 +16,10 @@ export const SavedNotesList: React.FC = () => {
     <View style={styles.noteContainer}>
       <ScrollView>
         {notes?.map((note) => (
-          <Pressable key={note.id}>
+          <Pressable
+            key={note.id}
+            onPress={() => navigation.navigate("EditNote", { noteId: note.id })}
+          >
             <View style={styles.row}>
               <Text style={styles.note} key={note.id}>
                 {note.text.length === 0 ? "(Blank Note)" : note.text}

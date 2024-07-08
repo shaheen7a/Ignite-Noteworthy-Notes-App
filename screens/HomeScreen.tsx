@@ -5,7 +5,7 @@ import { StackNavigationProp } from "../types";
 import { SavedNotesList } from "../components/SavedNotedList";
 
 export const HomeScreen: React.FC = () => {
-  const navigation = useNavigation<StackNavigationProp>();
+  
 
   return (
     <>
