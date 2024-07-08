@@ -9,7 +9,7 @@ export type NoteStore = {
   notes: Array<Note>;
 };
 
-const STORE_KEY = "TAKE_NOTES_STORE";
+const STORE_KEY = "TAKE_NOTES_STORE_V2";
 export const getAllNotes = async () => {
   const storeItem = await AsyncStorage.getItem(STORE_KEY);
   if (storeItem) {

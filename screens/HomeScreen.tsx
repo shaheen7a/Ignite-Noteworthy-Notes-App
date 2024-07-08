@@ -1,26 +1,15 @@
-import { View, Text, Button } from "react-native";
-import React, { useEffect, useState } from "react";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { Button, StyleSheet } from "react-native";
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "../types";
-import { Note, getAllNotes, getNote } from "../services/noteStoreService";
-type Props = {
-  toggleNewNote: (toggle: boolean) => void;
-};
-export const HomeScreen: React.FC<Props> = () => {
-  const navigation = useNavigation<StackNavigationProp>();
-  const [notes, setNotes] = useState<Note[]>();
+import { SavedNotesList } from "../components/SavedNotedList";
 
-  useFocusEffect(() => {
-    getAllNotes().then((result) => setNotes(result.notes));
-  });
+export const HomeScreen: React.FC = () => {
+  const navigation = useNavigation<StackNavigationProp>();
 
   return (
     <>
-      <View>
-        {notes?.map((note) => (
-          <Text key={note.id}>{note.text}</Text>
-        ))}
-      </View>
+      <SavedNotesList />
       <Button
         onPress={() => navigation.navigate("EditNote")}
         title="New Note"
