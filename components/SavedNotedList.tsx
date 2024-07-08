@@ -1,6 +1,6 @@
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getAllNotes, Note } from "../services/noteStoreService";
 
 export const SavedNotesList: React.FC = () => {
@@ -12,13 +12,17 @@ export const SavedNotesList: React.FC = () => {
 
   return (
     <View style={styles.noteContainer}>
-      {notes?.map((note) => (
-        <View style={styles.row}>
-          <Text style={styles.note} key={note.id}>
-            {note.text.length === 0 ? "(Blank Note)" : note.text}
-          </Text>
-        </View>
-      ))}
+      <ScrollView>
+        {notes?.map((note) => (
+          <Pressable key={note.id}>
+            <View style={styles.row}>
+              <Text style={styles.note} key={note.id}>
+                {note.text.length === 0 ? "(Blank Note)" : note.text}
+              </Text>
+            </View>
+          </Pressable>
+        ))}
+      </ScrollView>
     </View>
   );
 };

@@ -1,14 +1,21 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { getNote } from "../services/noteStoreService";
 
 type Props = {
   saveNote: (text: string) => void;
+  noteId: string | undefined;
 };
 
-const NoteTakingInput: React.FC<Props> = ({ saveNote }) => {
+const NoteTakingInput: React.FC<Props> = ({ saveNote, noteId }) => {
   const [text, setText] = useState<string>("");
 
+  useEffect(() => {
+    if (noteId) {
+      getNote(noteId).then((result) => setText(result?.text ?? ""));
+    }
+  }, []);
   return (
     <>
       <TextInput
@@ -16,6 +23,7 @@ const NoteTakingInput: React.FC<Props> = ({ saveNote }) => {
         style={styles.textInput}
         value={text}
         onChangeText={setText}
+        autoFocus={true}
       />
       <Button title="Save note" onPress={() => saveNote(text)} />
     </>
