@@ -24,8 +24,13 @@ export const getNote = async (id: string) => {
   return note;
 };
 
-export const saveNote = async (text: string) => {
+export const saveNote = async (text: string, noteId: string | undefined) => {
   const noteStore = await getAllNotes();
-  const notes = [...noteStore.notes, { id: Date.now().toString(), text: text }];
-  await AsyncStorage.setItem(STORE_KEY, JSON.stringify({ notes: notes }));
+  if (noteId) {
+    const noteIndex = noteStore.notes.findIndex((note) => note.id === noteId);
+    noteStore.notes.splice(noteIndex, 1, { id: noteId, text: text });
+  } else {
+    noteStore.notes.push({ id: Date.now().toString(), text: text });
+  }
+  await AsyncStorage.setItem(STORE_KEY, JSON.stringify(noteStore));
 };
