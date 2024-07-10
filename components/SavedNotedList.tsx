@@ -37,9 +37,10 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     width: "100%",
     fontSize: 16,
+    color: "#FFFFFF",
   },
   row: {
-    borderBottomColor: "#e6e6e6",
+    borderBottomColor: "#555555", 
     borderBottomWidth: 1,
     width: "90%",
     alignSelf: "center",
@@ -50,5 +51,6 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
     height: 80,
+    backgroundColor: "#444444",
   },
 });

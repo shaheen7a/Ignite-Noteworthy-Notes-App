@@ -1,4 +1,4 @@
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useLayoutEffect } from "react";
 import NoteTakingInput from "../components/NoteTakingInput";
 import { EditScreenRouterProp, StackNavigationProp } from "../types";

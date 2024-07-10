@@ -1,16 +1,19 @@
-import { Button, StyleSheet } from "react-native";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "../types";
 import { SavedNotesList } from "../components/SavedNotedList";
+import { StyleSheet } from "react-native";
 
 export const HomeScreen: React.FC = () => {
-  
-
   return (
     <>
-      <SavedNotesList />
-      
+      <SavedNotesList style={styles.home} />
     </>
   );
 };
+
+
+const styles = StyleSheet.create({
+  home: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+});

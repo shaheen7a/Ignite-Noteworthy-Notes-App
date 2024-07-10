@@ -1,7 +1,6 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
-import { getNote, saveNote } from "../services/noteStoreService";
+import { StyleSheet, TextInput } from "react-native";
+import { getNote } from "../services/noteStoreService";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "../types";
 import { SaveNote } from "./SaveNote";
@@ -17,7 +16,7 @@ const NoteTakingInput: React.FC<Props> = ({ noteId }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (noteId ? <SaveNote text={text} id={noteId} /> : <></>),
+      headerLeft: () => <SaveNote text={text} id={noteId ?? ""} />,
     });
   }, [navigation, text, noteId]);
 
@@ -48,7 +47,8 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     paddingBottom: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#ffb70342",
+    color: "#FFFFFF",
+    backgroundColor: "#444444",
   },
 });
 

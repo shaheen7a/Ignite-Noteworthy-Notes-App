@@ -15,7 +15,18 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "#333333", // Set your header background color here
+          },
+          headerTintColor: "#FFFFFF", // Set your header text color
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontWeight: "bold", // Customize your header text style if needed
+          },
+        }}
+      >
         <Stack.Screen
           name="Home"
           component={HomeScreen}
